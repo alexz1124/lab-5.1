@@ -60,8 +60,13 @@ class GameFragment : Fragment() {
 
         binding.endGameButton.setOnClickListener { onEndGame() }
 
+        /** Setting up LiveData observation relationship **/
         viewModel.score.observe(this, Observer { newScore ->
             binding.scoreText.text = newScore.toString()
+        })
+        /** Setting up LiveData observation relationship **/
+        viewModel.word.observe(this, Observer { newWord ->
+            binding.wordText.text = newWord
         })
 
         updateScoreText()
