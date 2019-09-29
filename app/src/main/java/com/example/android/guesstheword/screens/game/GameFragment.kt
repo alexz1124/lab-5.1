@@ -24,6 +24,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment
 import com.example.android.guesstheword.R
@@ -58,6 +59,11 @@ class GameFragment : Fragment() {
         binding.skipButton.setOnClickListener { onSkip() }
 
         binding.endGameButton.setOnClickListener { onEndGame() }
+
+        viewModel.score.observe(this, Observer { newScore ->
+            binding.scoreText.text = newScore.toString()
+        })
+
         updateScoreText()
         updateWordText()
         return binding.root
